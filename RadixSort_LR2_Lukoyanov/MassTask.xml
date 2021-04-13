@@ -1,0 +1,10 @@
+﻿<experiments>
+    <experiment name="Bubble">
+        <nodes name="Arithmetic Progression" minElement="0" maxElement="20" startLength="1" diff="10"
+               maxLength="3000" repeat="1">
+        </nodes>
+        <nodes name="Geometric Progression" minElement="0" maxElement="20" startLength="10" Znamen="1.5"
+               maxLength="10000" repeat="1">
+        </nodes>
+    </experiment>
+</experiments>

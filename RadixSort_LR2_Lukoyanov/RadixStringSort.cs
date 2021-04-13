@@ -10,16 +10,11 @@ namespace RadixSort_LR2_Lukoyanov
 
         private int GetLongestLength(IEnumerable<string> a) => a.Select(s => s.Length).Concat(new[] {0}).Max();
 
-        private int GetCharInString(int i, int d, IReadOnlyList<string> a)
+        public SortedWithInfo Sort(string[] initialArray)
         {
-            if (d < 0 || d >= a[i].Length)
-                return 0;
-
-            return a[i][d];
-        }
-
-        public SortedWithInfo SortWithInfo(string[] initialArray)
-        {
+            if (initialArray.Length == 1)
+                return new SortedWithInfo(initialArray, 0);
+            
             var arrLength = initialArray.Length;
             var iteration = 0;
             var sorted = new string[arrLength];
@@ -29,7 +24,7 @@ namespace RadixSort_LR2_Lukoyanov
                 var count = new int[Repeats + 1];
                 for (var i = 0; i < arrLength; ++i)
                 {
-                    var c = GetCharInString(i, d, initialArray);
+                    var c = initialArray[i].CharValueAt(d);
                     count[c + 1]++;
                     iteration++;
                 }
@@ -42,7 +37,7 @@ namespace RadixSort_LR2_Lukoyanov
 
                 for (var i = 0; i < arrLength; ++i)
                 {
-                    var c = GetCharInString(i, d, initialArray);
+                    var c = initialArray[i].CharValueAt(d);
                     sorted[count[c]++] = initialArray[i];
                     iteration++;
                 }

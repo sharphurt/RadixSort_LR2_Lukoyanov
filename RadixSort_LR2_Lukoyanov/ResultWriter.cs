@@ -4,19 +4,26 @@ using System.Text;
 
 namespace RadixSort_LR2_Lukoyanov
 {
-    public static class ResultWriter
+    public class ResultWriter
     {
-        public static void WriteResult(SortedWithInfo info, string path)
+        public string Path;
+
+        public ResultWriter(string path)
+        {
+            Path = path;
+            var fs = File.CreateText(path);
+            fs.WriteLine("Array Length;Iterations;");
+            fs.Close();
+        }
+
+        public void WriteResult(SortedWithInfo info)
         {
             try
             {
-                if (File.Exists(path))
-                    File.Delete(path);
-
-                using (StreamWriter sw = File.CreateText(path))    
-                { 
-                    sw.WriteLine("Length,Iterations");
-                    sw.WriteLine($"{info.Array.Length},{info.Iterations}");
+                using (var sw = File.AppendText(Path))
+                {
+                    sw.WriteLine($"{info.Array.Length};{info.Iterations};");
+                    sw.Close();
                 }
             }
             catch (Exception e)
